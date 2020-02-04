@@ -1,35 +1,59 @@
 import 'package:flutter/material.dart';
-void main () => runApp(MyApp());
+
+
+void main () => runApp(MyApp(
+  //要调用MyApp需要传入一个list集合
+  listItem: new List.generate(1000, (i)=> "Item数据 $i")
+));
 
 class MyApp extends StatelessWidget{
+   //接收父类传入的1000条数据
+  final List listItem; // 定义变量
+  MyApp({key, @required this.listItem}):super(key:key); // 接受数据
+
+
   @override
   Widget build(BuildContext context ){
-
-    var stack = new Stack(
-      alignment: const FractionalOffset(1, 1),
-      children: <Widget>[
-        new CircleAvatar(
-          backgroundImage: new NetworkImage('http://img5.mtime.cn/mt/2018/10/22/104316.77318635_180X260X4.jpg'),
-          radius: 100.0,
-        ),
-        new Container(
-            decoration: new BoxDecoration(
-              color: Colors.lightBlue,
-            ),
-            padding: EdgeInsets.all(5.0),
-            child: new Text('JSPang 技术胖'),
-          )
-
-      ]
-    );
-
       return MaterialApp(
-        title:'qwqweqwe',
+        title:'ListView widget',
         home:Scaffold(
-          appBar: AppBar(title: new Text('层叠布局2')),
-          body: Center(child:stack
-        )
+          appBar: AppBar(title: new Text('woshi bar')),
+          body: ListView.builder(
+            itemCount: listItem.length, // listItem是接收到的list数据
+            itemBuilder:(context,index){
+              return new ListTile(
+                title:new Text('${listItem[index]}'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => new SecondScreen(secondItem: listItem)
+                    )
+                  );
+                }
+              );
+            }
+          )
         ),
       );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+   final List secondItem; // 定义变量
+  SecondScreen({key, @required this.secondItem}):super(key:key); // 接受数据
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: AppBar(title: Text('第二2篇')),
+      body: Center(child: RaisedButton(
+        child: Text("secondItem[index]"),
+        onPressed: (){
+          Navigator.pop(context);
+        },
+        ),
+      )
+    );
   }
 }

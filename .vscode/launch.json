@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Flutter-jpang",
+            "name": "Flutter-jason",
             "request": "launch",
             "type": "dart"
         }

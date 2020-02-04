@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 void main () => runApp(MyApp(
   //要调用MyApp需要传入一个list集合
-  items: new List<String>.generate(1000, (i)=> "Itemsad $i")
+  listItem: new List<String>.generate(1000, (i)=> "Item数据 $i")
 ));
 
 class MyApp extends StatelessWidget{
    //接收父类传入的1000条数据
-  final List<String> items;
-  MyApp({key, @required this.items}):super(key:key);
+  final List<String> listItem; // 定义变量
+  MyApp({key, @required this.listItem}):super(key:key); // 接受数据
 
 
   @override
@@ -17,10 +17,10 @@ class MyApp extends StatelessWidget{
         home:Scaffold(
           appBar: AppBar(title: new Text('woshi bar')),
           body: ListView.builder(
-            itemCount: items.length, // 长度
+            itemCount: listItem.length, // listItem是接收到的list数据
             itemBuilder:(context,index){
               return new ListTile(
-                title:new Text('${items[index]}'),
+                title:new Text('${listItem[index]}'),
               );
             }
           )
