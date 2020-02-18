@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         body:  Center(  // body组件
           child: Container(
               child: new Image.network(
-                'https://pixlr.com/photo/image-design-11-1-pw.jpg',
+                'https://user-gold-cdn.xitu.io/2020/2/17/17052312b4d1ea5a?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1',
                 fit: BoxFit.scaleDown,
                 color: Colors.orange,
                 colorBlendMode: BlendMode.darken,
