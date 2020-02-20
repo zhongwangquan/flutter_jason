@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../api/api_method.dart';
+import 'package:dio/dio.dart';
+import '../config/dioRequests.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                     child: Text('查询'),
                   ),
                   Text(
-                    '查询的名字为：${showText}。总重复人数为$showNum',
+                    '查询的名字为：$showText。总重复人数为$showNum',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   )
@@ -45,7 +46,20 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  
+  Future getHttp(String name) async {
+    try {
+      Dio dio = new Dio();
+      dio.options.headers = httpHeader;
+      Response response = await dio.post(
+        "https://time.geekbang.org/serv/v2/explore/list",
+        data: {'block_name': "lecture_banner"}
+      );
+      print(response);
+      return response.data;
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void _searchName() {
     if(typeController.text.toString() == '') {

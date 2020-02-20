@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../api/api_method.dart';
+import 'package:dio/dio.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -33,8 +33,16 @@ class _HomePageState extends State<HomePage> {
                     onPressed: _searchName,
                     child: Text('查询'),
                   ),
+                  RaisedButton(
+                    onPressed: _searchName,
+                    child: Text('查询'),
+                  ),
+                  RaisedButton(
+                    onPressed: _searchName,
+                    child: Text('查询'),
+                  ),
                   Text(
-                    '查询的名字为：${showText}。总重复人数为$showNum',
+                    '查询的名字为：$showText。总重复人数为$showNum',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   )
@@ -45,7 +53,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  
+  Future getHttp(String name) async {
+    try {
+      Response response = await Dio().post(
+        "http://yapi.flutterweb.cn/mock/270/api/post",
+        data: {'name': name}
+      );
+      print(response);
+      return response.data;
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void _searchName() {
     if(typeController.text.toString() == '') {
